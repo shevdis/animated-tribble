@@ -1,12 +1,11 @@
 package com.example.bmstu_project;
 
-import static com.example.bmstu_project.MainActivity.stringToHex;
+import static com.example.bmstu_project.SecondPart.stringToHex;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -17,12 +16,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bmstu_project.databinding.ActivityMainBinding;
 import com.example.bmstu_project.databinding.ActivityThirdPartBinding;
 
 public class ThirdPart extends AppCompatActivity implements TransactionEvents {
 
-    private @NonNull ActivityThirdPartBinding binding;
+    private ActivityThirdPartBinding binding;
     private String pin;
     private ActivityResultLauncher activityResultLauncher;
     public native boolean transaction(byte[] trd);
@@ -37,8 +35,7 @@ public class ThirdPart extends AppCompatActivity implements TransactionEvents {
                 new Thread(()-> {
                     try {
                         byte[] trd = stringToHex("9F0206000000000100");
-                        boolean ok = transaction(trd);
-                        transactionResult(ok);
+                        transaction(trd);
                     } catch (Exception ex) {
                         Log.d("!!!", ex.getMessage());
                     }

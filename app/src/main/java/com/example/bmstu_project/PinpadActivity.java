@@ -17,42 +17,50 @@ import java.util.Arrays;
 
 public class PinpadActivity extends AppCompatActivity {
 
-
-    TextView tvPin;
+    private ActivityPinpadBinding binding;
+    private TextView tvPin;
     String pin = "";
-    final int MAX_KEYS = 10;
+
+    private static final int MAX_KEYS = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pinpad);
+        binding = ActivityPinpadBinding.inflate(getLayoutInflater());
 
-        tvPin = findViewById(R.id.txtPin);
-
-        ShuffleKeys();
-
-        findViewById(R.id.btnOK).setOnClickListener((View) -> {
-            finish();
-        });
-
-        TextView ta = findViewById(R.id.txtAmount);
+        TextView ta = binding.txtAmount;
         String amt = String.valueOf(getIntent().getStringExtra("amount"));
         Long f = Long.valueOf(amt);
         DecimalFormat df = new DecimalFormat("#,###,###,##0.00");
         String s = df.format(f);
         ta.setText("Сумма: " + s);
+        TextView tp = binding.txtPtc;
 
-        TextView tp = findViewById(R.id.txtPtc);
         int pts = getIntent().getIntExtra("ptc", 0);
         if (pts == 2)
             tp.setText("Осталось две попытки");
         else if (pts == 1)
             tp.setText("Осталась одна попытка");
 
-        findViewById(R.id.btnReset).setOnClickListener((View) -> {
-            pin = "";
-            tvPin.setText("");
+        tvPin = binding.txtPin;
+        ShuffleKeys();
+        binding.btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent();
+                it.putExtra("pin", pin);
+                setResult(RESULT_OK, it);
+                finish();
+            }
         });
+        binding.btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pin = "";
+                tvPin.setText("");
+            }
+        });
+        setContentView(binding.getRoot());
     }
 
     public void keyClick(View view) {
@@ -63,27 +71,21 @@ public class PinpadActivity extends AppCompatActivity {
             pin += key;
             tvPin.setText("****".substring(3 - sz));
         }
-        findViewById(R.id.btnOK).setOnClickListener((View) -> {
-            Intent it = new Intent();
-            it.putExtra("pin", pin);
-            setResult(RESULT_OK, it);
-            finish();
-        });
     }
 
     protected void ShuffleKeys()
     {
-        Button keys[] = new Button[] {
-                findViewById(R.id.btnKey0),
-                findViewById(R.id.btnKey1),
-                findViewById(R.id.btnKey2),
-                findViewById(R.id.btnKey3),
-                findViewById(R.id.btnKey4),
-                findViewById(R.id.btnKey5),
-                findViewById(R.id.btnKey6),
-                findViewById(R.id.btnKey7),
-                findViewById(R.id.btnKey8),
-                findViewById(R.id.btnKey9),
+        Button[] keys = new Button[] {
+                binding.btnKey0,
+                binding.btnKey1,
+                binding.btnKey2,
+                binding.btnKey3,
+                binding.btnKey4,
+                binding.btnKey5,
+                binding.btnKey6,
+                binding.btnKey7,
+                binding.btnKey8,
+                binding.btnKey9,
         };
 
         byte[] rnd = MainActivity.randomBytes(MAX_KEYS);

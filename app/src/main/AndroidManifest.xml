@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
@@ -16,13 +17,16 @@
             android:name=".FourthPart"
             android:exported="false" />
         <activity
-            android:name=".TransactionEvents"
-            android:exported="false" />
-        <activity
             android:name=".ThirdPart"
             android:exported="false" />
         <activity
             android:name=".PinpadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SecondPart"
+            android:exported="false" />
+        <activity
+            android:name=".FirstPart"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -34,5 +38,5 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>
