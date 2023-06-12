@@ -48,13 +48,13 @@ public class MainActivity extends AppCompatActivity {
         binding.thirdPart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateTo(ThirdPart.class);
+                //navigateTo();
             }
         });
         binding.fourthPart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateTo(FourthPart.class);
+                //navigateTo();
             }
         });
         setContentView(binding.getRoot());

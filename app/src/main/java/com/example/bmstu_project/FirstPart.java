@@ -29,7 +29,7 @@ public class FirstPart extends AppCompatActivity {
         binding = com.example.bmstu_project.databinding.ActivityFirstPartBinding.inflate(getLayoutInflater());
         stringFromJNI();
         int res = MainActivity.initRng();
-        byte[] text = "Hello rpo".getBytes(StandardCharsets.UTF_8);
+        byte[] text = "Hello max".getBytes(StandardCharsets.UTF_8);
         TextView tvEncoded = binding.tvEncoded;
         TextView tvDecoded = binding.tvDecoded;
         binding.button.setOnClickListener(new View.OnClickListener() {
